@@ -1,6 +1,6 @@
 <template>
     <div>
-      <input type="text" id="slug" :value="slug" :class="[{'is-slugify-danger' : errors},className]" :disabled="disabled">
+      <input type="text" :id="id" :value="slug" :class="[{'is-danger' : errors},classname]" :disabled="disabled">
     </div>
 </template>
 <script>
@@ -9,6 +9,9 @@
             name : {
                 type : String,
                 required : true
+            },
+            id : {
+                default : 'slug'
             },
             model : {
                 type : String,
@@ -27,7 +30,7 @@
             disabled : {
                 default : false
             },
-            className : {
+            classname : {
                 default : 'input'
             },
         },
@@ -51,7 +54,6 @@
         },
         computed: {
             slug: function() {
-                console.log(this.name);
               var slug = this.sanitizeTitle(this.$parent[this.name]);
               this.$parent[this.model] = slug;
               return slug;
