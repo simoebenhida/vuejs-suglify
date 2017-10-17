@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anthonygore/vue-clock-simple"
+    "url": "git+https://github.com/simoebenhida/vuejs-suglify"
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
