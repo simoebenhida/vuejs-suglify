@@ -72,7 +72,7 @@ The separator can be change by passing ``sep`` attribute by default is ``-``
 ```
 If You want the first letter to be UpperCase you can use `` lowerCase ``
 ```javascript
-<vue-suglify name="title" model="slug" lowercase="false"></vue-suglify>
+<vue-suglify name="title" model="slug" :lowerCase="false"></vue-suglify>
 ```
 For The errors you need to add ``is-danger`` class css and pass the ``errors`` attribute as boolean
 ```css
@@ -81,7 +81,7 @@ For The errors you need to add ``is-danger`` class css and pass the ``errors`` a
         border-color:#ff3860
     }
 </style>
-<vue-suglify name="title" model="slug" errors="true"></vue-suglify>
+<vue-suglify name="title" model="slug" :errors="true"></vue-suglify>
 ```
 ### Demo
 
