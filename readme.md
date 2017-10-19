@@ -85,7 +85,7 @@ For The errors you need to add ``is-danger`` class css and pass the ``errors`` a
 ```
 ### Demo
 
-Comming Soon
+<a href="http://devma.net/demo/suglify">Check Demo Here</a>
 
 ### Contributing
 
