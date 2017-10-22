@@ -2,6 +2,10 @@
 
 A Vue component that slugify your v-model
 
+### Demo
+
+<a href="http://devma.net/demo/suglify">Check Demo Here</a>
+
 ### Installation :
 
 ```javascript
@@ -83,9 +87,6 @@ For The errors you need to add ``is-danger`` class css and pass the ``errors`` a
 </style>
 <vue-suglify name="title" model="slug" :errors="true"></vue-suglify>
 ```
-### Demo
-
-<a href="http://devma.net/demo/suglify">Check Demo Here</a>
 
 ### Contributing
 
