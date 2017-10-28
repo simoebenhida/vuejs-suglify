@@ -33,10 +33,15 @@
             classname : {
                 default : 'input'
             },
+            extras : {
+                type : Object,
+                default: function () { return {} }
+            }
         },
         data() {
             return {
-                chars : {},            }
+                chars : {},
+            }
         },
         mounted() {
             Object.assign(this.chars,
@@ -49,7 +54,8 @@
                             this._map_polish(),
                             this._map_latvian(),
                             this._map_currency(),
-                            this._map_symbols()
+                            this._map_symbols(),
+                            this._map_extras()
                         )
         },
         computed: {
@@ -60,6 +66,9 @@
             }
       },
       methods : {
+        defaultValue() {
+            return {}
+        },
           sanitizeTitle: function(str) {
             var str = str
                     .toString();
@@ -71,10 +80,12 @@
             var _sep = this.sep;
 
             for (var i=0, l=str.length ; i<l ; i++) {
-                    slug += (this.chars[str.charAt(i)])
-                             ? this.chars[str.charAt(i)]
-                             : str.charAt(i);
-                }
+
+                        slug += (typeof(this.chars[str.charAt(i)]) !== 'undefined')
+                                 ? this.chars[str.charAt(i)]
+                                 : str.charAt(i);
+            }
+
             str = slug
                         .replace(/^\s+|\s+$/g, '')      // Trim
                         .replace(/[^-\u0600-۾\w\d\$\*\(\)\'\!\_]/g, _sep)   // Remove invalid chars
@@ -168,11 +179,34 @@
             },
             _map_symbols: function() {
                 return {
-                    '©':'(c)', 'œ': 'oe', 'Œ': 'OE', '∑': 'sum', '®': '(r)', '†': '+',
-                    '“': '"', '”': '"', '‘': "'", '’': "'", '∂': 'd', 'ƒ': 'f', '™': 'tm',
-                    '℠': 'sm', '…': '...', '˚': 'o', 'º': 'o', 'ª': 'a', '•': '*',
-                    '∆': 'delta', '∞': 'infinity', '♥': 'love', '&': 'and'
+                    '©':'(c)',
+                    'œ': 'oe',
+                    'Œ': 'OE',
+                    '∑': 'sum',
+                    '®': '(r)',
+                    '†': '+',
+                    '“': '',
+                    '”': '',
+                    '‘': "",
+                    '’': "",
+                    "'" : "",
+                    '∂': 'd',
+                    'ƒ': 'f',
+                    '™': 'tm',
+                    '℠': 'sm',
+                    '…': '...',
+                    '˚': 'o',
+                    'º': 'o',
+                    'ª': 'a',
+                    '•': '*',
+                    '∆': 'delta',
+                    '∞': 'infinity',
+                    '♥': 'love',
+                    '&': 'and'
                 };
+            },
+            _map_extras: function() {
+                return this.extras
             }
     }
     }
