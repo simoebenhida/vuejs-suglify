@@ -1,6 +1,6 @@
 <template>
     <div>
-      <input type="text" :id="id" :value="slug" :class="[{'is-danger' : errors},classname]" :disabled="disabled">
+      <input type="text" :id="id" v-model="$parent[this.model]" @change="slug" :class="[{'is-danger' : errors},classname]" :disabled="disabled">
     </div>
 </template>
 <script>
@@ -43,6 +43,9 @@
                 chars : {},
             }
         },
+        ready() {
+            // this.slug = this.$parent[this.name]
+        },
         mounted() {
             Object.assign(this.chars,
                             this._map_latin(),
@@ -57,19 +60,22 @@
                             this._map_symbols(),
                             this._map_extras()
                         )
+            this.slug = this.sanitizeTitle(this.$parent[this.name])
         },
         computed: {
-            slug: function() {
-              var slug = this.sanitizeTitle(this.$parent[this.name]);
-              this.$parent[this.model] = slug;
-              return slug;
-            }
+            slug: {
+                set: function (value) {
+                      this.$parent[this.model] = value;
+                },
+                 get: function () {
+                      var slug = this.sanitizeTitle(this.$parent[this.name]);
+                      this.$parent[this.model] = slug;
+                      return slug;
+                }
+        }
       },
       methods : {
-        defaultValue() {
-            return {}
-        },
-          sanitizeTitle: function(str) {
+        sanitizeTitle: function(str) {
             var str = str
                     .toString();
 
@@ -80,10 +86,9 @@
             var _sep = this.sep;
 
             for (var i=0, l=str.length ; i<l ; i++) {
-
-                        slug += (typeof(this.chars[str.charAt(i)]) !== 'undefined')
-                                 ? this.chars[str.charAt(i)]
-                                 : str.charAt(i);
+                slug += (typeof(this.chars[str.charAt(i)]) !== 'undefined')
+                         ? this.chars[str.charAt(i)]
+                         : str.charAt(i);
             }
 
             str = slug
