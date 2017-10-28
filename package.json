@@ -1,6 +1,6 @@
 {
   "name": "vue-suglify",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "description": "A Vue.js component to suglify",
   "main": "dist/vue-suglify.js",
   "scripts": {
