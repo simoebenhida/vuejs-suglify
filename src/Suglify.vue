@@ -36,15 +36,16 @@
             extras : {
                 type : Object,
                 default: function () { return {} }
+            },
+            limit : {
+                type : Number,
+                default : 30
             }
         },
         data() {
             return {
                 chars : {},
             }
-        },
-        ready() {
-            // this.slug = this.$parent[this.name]
         },
         mounted() {
             Object.assign(this.chars,
@@ -68,6 +69,9 @@
                       this.$parent[this.model] = value;
                 },
                  get: function () {
+                      if (this.$parent[this.name].length > this.limit) {
+                          return this.$parent[this.model];
+                      }
                       var slug = this.sanitizeTitle(this.$parent[this.name]);
                       this.$parent[this.model] = slug;
                       return slug;
