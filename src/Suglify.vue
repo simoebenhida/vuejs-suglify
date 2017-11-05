@@ -1,6 +1,6 @@
 <template>
     <div>
-      <input type="text" :id="id" v-model="$parent[this.model]" @change="slug" :class="[{'is-danger' : errors},classname]" :disabled="disabled">
+      <input type="text" :id="id" :value="slug" :class="[{'is-danger' : errors},classname]" :disabled="disabled">
     </div>
 </template>
 <script>
@@ -13,7 +13,7 @@
             id : {
                 default : 'slug'
             },
-            model : {
+            slug : {
                 type : String,
                 required : true
             },
@@ -31,7 +31,7 @@
                 default : false
             },
             classname : {
-                default : 'input'
+                default : 'form-control'
             },
             extras : {
                 type : Object,
@@ -47,39 +47,29 @@
                 chars : {},
             }
         },
-        mounted() {
-            Object.assign(this.chars,
-                            this._map_latin(),
-                            this._map_greek(),
-                            this._map_turkish(),
-                            this._map_russian(),
-                            this._map_ukranian(),
-                            this._map_czech(),
-                            this._map_polish(),
-                            this._map_latvian(),
-                            this._map_currency(),
-                            this._map_symbols(),
-                            this._map_extras()
-                        )
-            this.slug = this.sanitizeTitle(this.$parent[this.name])
-        },
-        computed: {
-            slug: {
-                set: function (value) {
-                      this.$parent[this.model] = value;
-                },
-                 get: function () {
-                      if (this.$parent[this.name].length > this.limit) {
-                          return this.$parent[this.model];
-                      }
-                      var slug = this.sanitizeTitle(this.$parent[this.name]);
-                      this.$parent[this.model] = slug;
-                      return slug;
-                }
+     watch: {
+        name: {
+            immediate: true,
+                handler(value) {
+                  this.$emit('update:slug', this.sanitizeTitle(value))
+          }
         }
-      },
+    },
       methods : {
         sanitizeTitle: function(str) {
+         Object.assign(this.chars,
+                        this._map_latin(),
+                        this._map_greek(),
+                        this._map_turkish(),
+                        this._map_russian(),
+                        this._map_ukranian(),
+                        this._map_czech(),
+                        this._map_polish(),
+                        this._map_latvian(),
+                        this._map_currency(),
+                        this._map_symbols(),
+                        this._map_extras()
+                    )
             var str = str
                     .toString();
 
@@ -90,6 +80,7 @@
             var _sep = this.sep;
 
             for (var i=0, l=str.length ; i<l ; i++) {
+                // console.log(this.chars[str.charAt(i)])
                 slug += (typeof(this.chars[str.charAt(i)]) !== 'undefined')
                          ? this.chars[str.charAt(i)]
                          : str.charAt(i);
@@ -220,4 +211,3 @@
     }
     }
 </script>
-
