@@ -4,7 +4,7 @@ A Vue component that slugify your v-model
 
 ### Demo
 
-<a href="http://devma.net/demo/suglify">Check Demo Here</a>
+<a href="http://devma.net/package/Suglify">Demo</a>
 
 ### Installation :
 
