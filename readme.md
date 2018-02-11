@@ -94,15 +94,15 @@ Limit the number letters using `limit` by default is `100`
 
 You can now pass object named extras where you replace a letter with something of your choice
 
-* In this example we remplace letter `s` with letter `Suglify`
+In this example we remplace letter `s` with letter `Suglify`
 
 ```html
 <suglify :slugify="title" :slug.sync="titleSlug" :extras="{'s' : 'Suglify'}">
         <input slot-scope="{inputBidding}" v-bind="inputBidding"
                type="text" class="form-control" placeholder="Slug ...">
 </suglify>
+```
 
 ### Contributing
 
 You are more than welcome to contribute to this repo with anything you think is useful. fixes are more than welcome.
-```
